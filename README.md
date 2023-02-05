@@ -1,72 +1,139 @@
 # Home Library Service
 
-## Prerequisites
+## Installation
 
-- Git - [Download & Install Git](https://git-scm.com/downloads).
-- Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+Install the dependencies and devDependencies and start the server.
 
-## Downloading
-
-```
-git clone {repository URL}
+```sh
+npm i
 ```
 
-## Installing NPM modules
+Start server in production
 
-```
-npm install
-```
-
-## Running application
-
-```
+```sh
 npm start
 ```
 
-After starting the app on port (4000 as default) you can open
-in your browser OpenAPI documentation by typing http://localhost:4000/doc/.
-For more information about OpenAPI/Swagger please visit https://swagger.io/.
+Start server in development
 
-## Testing
-
-After application running open new terminal and enter:
-
-To run all tests without authorization
-
+```sh
+npm run start:dev
 ```
+
+Start tests
+
+```sh
 npm run test
 ```
 
-To run only one of all test suites
+## Important
 
-```
-npm run test -- <path to suite>
-```
+artistId and albumId are optional, it's might be null or string UUID
 
-To run all test with authorization
+## Request routes
 
-```
-npm run test:auth
-```
+GET /user - get all users
+GET /user/:id - get single user by id
+POST /user - create user
+Request Body example:
 
-To run only specific test suite with authorization
-
-```
-npm run test:auth -- <path to suite>
-```
-
-### Auto-fix and format
-
-```
-npm run lint
+```sh
+{
+  "login": "log1",
+  "password": "PASSWORD"
+}
 ```
 
+PUT /user/:id - update user's password
+Request Body example:
+
+```sh
+{
+    "oldPassword": "PASS",
+    "newPassword": "NEWpass"
+}
 ```
-npm run format
+
+DELETE /user/:id - delete user
+GET /track - get all tracks
+GET /track/:id - get single track by id
+POST /track - create new track
+Request Body example:
+
+```sh
+{
+    "name": "song",
+    "artistId": "691dd892-ee30-4428-b939-b71605a7776e",
+    "albumId": "14518702-d4e6-4e82-9fa2-22403b3d1a17",
+    "duration": 1
+}
 ```
 
-### Debugging in VSCode
+PUT /track/:id - update track info
+Request Body example:
 
-Press <kbd>F5</kbd> to debug.
+```sh
+{
+    "name": "song3",
+    "artistId": "72a9006c-1418-4341-be49-2ff9e86e4589",
+    "albumId": "a8aa5281-2e03-4cd8-a2c8-a3a81e900b42",
+    "duration": 5
+}
+```
 
-For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+DELETE /track/:id - delete track
+GET /artist - get all artists
+GET /artist/:id - get single artist by id
+POST /artist - create new artist
+Request Body example:
+
+```sh
+{
+  "name": "Jhony Cash",
+  "grammy": true
+}
+```
+
+PUT /artist/:id - update artist info
+Request Body example:
+
+```sh
+{
+  "name": "Freddie Mercury",
+  "grammy": false
+}
+```
+
+DELETE /artist/:id - delete album
+GET /album - get all albums
+GET /album/:id - get single album by id
+POST /album - create new album
+Request Body example:
+
+```sh
+{
+  "name": "Metallica",
+  "year": 1995,
+  "artistId": "691dd892-ee30-4428-b939-b71605a7776e"
+}
+```
+
+PUT /album/:id - update album info
+Request Body example:
+
+```sh
+{
+  "name": "AcDc",
+  "year": 1980,
+  "artistId": "496c5900-f61f-4980-8d67-527d38cfb9aa"
+}
+```
+
+DELETE /album/:id - delete album
+GET /favs - get all favorites
+POST /favs/track/:id - add track to the favorites
+DELETE /favs/track/:id - delete track from favorites
+POST /favs/album/:id - add album to the favorites
+DELETE /favs/album/:id - delete album from favorites
+POST /favs/artist/:id - add artist to the favorites
+DELETE /favs/artist/:id - delete artist from favorites
